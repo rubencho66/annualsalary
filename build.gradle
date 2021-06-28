@@ -1,0 +1,56 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.2'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.mas.global'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	swagger = '3.0.0'
+	modelMapper = '2.3.9'
+	jUnit = '5.7.0'
+	jRunner='1.2.0'
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: "$swagger"
+	implementation group: 'io.springfox', name: 'springfox-boot-starter', version: "$swagger"
+	implementation group: 'org.modelmapper', name: 'modelmapper', version: "$modelMapper"
+	implementation 'org.liquibase:liquibase-core'
+
+	compileOnly 'org.projectlombok:lombok'
+
+	runtimeOnly 'org.postgresql:postgresql'
+
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// test
+
+	testImplementation group: 'org.junit.platform', name: 'junit-platform-runner', version: "$jRunner"
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "$jUnit"
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: "$jUnit"
+	testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: "$jUnit"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+	useJUnitPlatform()
+}
